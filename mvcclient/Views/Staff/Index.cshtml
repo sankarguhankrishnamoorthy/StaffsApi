@@ -1,0 +1,88 @@
+﻿@model IEnumerable<mvcclient.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .panel-info {
+            border: 2px solid #000066;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddCourse">Create New Course</a>
+    <a asp-action="GetAllClass">CLASS</a>
+</p>\
+
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                    <div onclick="location.href='@Url.Action("Topic", "Staff",item)'" class="panel panel-info">
+                    <div class="panel-heading"><h3>@Html.DisplayFor(modelItem => item.CourseName)</h3></div>
+                    <div class="panel-body"><input type="button" value="Enrolled" class="btn btn-primary" /></div>
+                </div>
+                
+            </td>
+            @*  <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Picture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>*@
+        <td>
+            <input type="button" value="Add Topic" onclick="location.href='@Url.Action("AddTopics", "Staff",item)'" class="btn btn-primary" />
+            <input type="button" value="Schedule class" onclick="location.href='@Url.Action("AddClass", "Staff",item)'" class="btn btn-primary" />
+
+            <input type="button" value="Details" class="btn btn-primary" onclick="location.href='@Url.Action("GetDetails", "Staff",item)'" />
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                 @Html.ActionLink("Details", "GetDetails", new { item })*@
+
+        </td>
+        </tr>
+
+}
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+﻿@model mvcclient.Models.Topic
+
+@{
+    ViewData["Title"] = "AddTopics";
+}
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+  int courseid= (int)@HttpContextAccessor.HttpContext.Session.GetInt32("cid");
+}
+
+<h1>AddTopics</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTopics" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseId" class="control-label"></label>
+                <input asp-for="CourseId" value=@courseid class="form-control" />
+                <span asp-validation-for="CourseId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TopicName" class="control-label"></label>
+                <input asp-for="TopicName" class="form-control" />
+                <span asp-validation-for="TopicName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TopicDesc" class="control-label"></label>
+                <input asp-for="TopicDesc" class="form-control" />
+                <span asp-validation-for="TopicDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaterialPath" class="control-label"></label>
+                <input asp-for="MaterialPath" type="file" name="Material" class="form-control" />
+                <span asp-validation-for="MaterialPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VideoPath" class="control-label"></label>
+                <input asp-for="VideoPath" type="file" name="Videopic" class="form-control" />
+                <span asp-validation-for="VideoPath" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
